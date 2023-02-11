@@ -1,7 +1,6 @@
 import components.CoursesCatalogComponent;
 import components.HeaderMenuComponent;
 import components.HeaderSubMenuPopupComponent;
-import data.HeaderSubMenuPopupData;
 import exceptions.BrowserNotSupportedException;
 import factories.WebDriverFactory;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -17,6 +16,7 @@ import pages.MainPage;
 import static data.EventsMenuItemsData.OPEN_WEBINAR;
 import static data.HeaderMenuData.LEARNING;
 import static data.HeaderSubMenuPopupData.EVENTS;
+import static data.HeaderSubMenuPopupData.QA;
 
 public class ProjectWorkTest {
 
@@ -50,7 +50,7 @@ public class ProjectWorkTest {
 
         mainPage.open();
         headerMenuComponent.moveToMenuItem(LEARNING);
-        headerSubMenuPopupComponent.headerSubMenuItemClick(HeaderSubMenuPopupData.QA);
+        headerSubMenuPopupComponent.headerSubMenuItemClick(QA);
         coursesCatalogComponent.checkCountCourseCards(12);
         coursesCatalogComponent.clickCourseCard(2);
         coursePage.checkTitlesCourse();
