@@ -39,7 +39,6 @@ public class ProjectWorkTest {
         }
     }
 
-
     @Test
     public void TestCards() {
         MainPage mainPage = new MainPage(driver);

@@ -1,9 +1,7 @@
 package waiters;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -28,9 +26,9 @@ public class Waiters {
         }
     }
 
-    public void waitCountOfElements(By elements, int count) {
+    public void waitCountOfElements(String elements, int count) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.numberOfElementsToBe(elements, count));
+        wait.until(ExpectedConditions.numberOfElementsToBe(By.xpath(elements), count));
     }
 
 }

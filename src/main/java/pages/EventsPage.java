@@ -32,18 +32,18 @@ public class EventsPage extends AbsBasePage{
     @FindBy (css = ".dod_new-event__type")
     public List<WebElement> eventTypeList;
 
-    private final static String dropdownMenuLocator = "//div[contains(@class, 'dod_new-events-dropdown js-dod_new_events-dropdown')]";
+    private final static String dropdownMenuLocator = ".dod_new-events-dropdown";
 
-    private final static String allEventsListTemplate = "%s/descendant::*[@title='%s']";
+    private final static String allEventsListTemplate = "%s__list-item[title='%s']";
 
     public void clickDropdownMenuItem(EventsMenuItemsData item) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].scrollIntoView({'block': 'center', 'inline': 'center'})", driver.findElement(By.xpath(dropdownMenuLocator)));
+        js.executeScript("arguments[0].scrollIntoView({'block': 'center', 'inline': 'center'})", driver.findElement(By.cssSelector(dropdownMenuLocator)));
         Waiters wait = new Waiters(driver);
-        String locator = String.format(allEventsListTemplate, dropdownMenuLocator, item.getName());
-        driver.findElement(By.xpath(dropdownMenuLocator)).click();
-        wait.waitForCondition(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(locator))));
-        driver.findElement(By.xpath(locator)).click();
+        String selector = String.format(allEventsListTemplate, dropdownMenuLocator, item.getName());
+        driver.findElement(By.cssSelector(dropdownMenuLocator)).click();
+        wait.waitForCondition(ExpectedConditions.elementToBeClickable(driver.findElement(By.cssSelector(selector))));
+        driver.findElement(By.cssSelector(selector)).click();
     }
 
     public void checkEventsCardTile(EventsMenuItemsData eventsMenuItemsData) {
@@ -86,7 +86,6 @@ public class EventsPage extends AbsBasePage{
         for (int i = 0; i <= 100; i++) {
             JavascriptExecutor js = (JavascriptExecutor) driver;
             js.executeScript("arguments[0].scrollIntoView({behavior: 'smooth'})", footer);
-            js.executeScript("arguments[0].scrollIntoView(false);", footer);
         }
     }
 }

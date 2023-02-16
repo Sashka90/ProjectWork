@@ -1,6 +1,5 @@
 package components;
 
-import data.CourseCatalogData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -15,29 +14,26 @@ public class CoursesCatalogComponent extends AbsBaseComponent{
         super(driver);
     }
 
-    private final static String courseCatalogElementsTemplate = "//h1//ancestor::section//child::%s";
+    private final static String showMoreButton = "//h1//ancestor::section//child::button";
+    private final static String courseCards = "//h1//ancestor::section//child::a[@href]";
 
     public void checkCountCourseCards(int count){
-        String showMoreButtonLocator = String.format(courseCatalogElementsTemplate, CourseCatalogData.SHOW_MORE_BUTTON.getName());
-        String cardsLocator = String.format(courseCatalogElementsTemplate, CourseCatalogData.CARDS.getName());
         Waiters wait = new Waiters(driver);
         if (isShowMoreButtonPresent()){
-            wait.waitForCondition(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(showMoreButtonLocator))));
-            driver.findElement(By.xpath(showMoreButtonLocator)).click();
+            wait.waitForCondition(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(showMoreButton))));
+            driver.findElement(By.xpath(showMoreButton)).click();
         }
-        wait.waitCountOfElements(By.xpath(cardsLocator), count);
+        wait.waitCountOfElements(courseCards, count);
     }
 
     public void clickCourseCard(int courseCard){
-        String cardsLocator = String.format(courseCatalogElementsTemplate, CourseCatalogData.CARDS.getName());
-        driver.findElements(By.xpath(cardsLocator)).get(courseCard).click();
+        driver.findElements(By.xpath(courseCards)).get(courseCard).click();
     }
 
     private boolean isShowMoreButtonPresent() {
-        String showMoreButtonLocator = String.format(courseCatalogElementsTemplate, CourseCatalogData.SHOW_MORE_BUTTON.getName());
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(showMoreButtonLocator)));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(showMoreButton)));
             return true;
         } catch (NoSuchElementException e){
             return false;

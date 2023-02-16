@@ -18,15 +18,15 @@ public class CoursePage extends AbsBasePage{
     public void checkTitlesCourse(){
         String locatorTitle = String.format(titlesCourseTemplate, CoursePageTitlesData.TITLE.getName());
         String locatorSubTitle = String.format(titlesCourseTemplate, CoursePageTitlesData.SUBTITLE.getName());
-        Assertions.assertTrue(driver.findElement(By.xpath(locatorTitle)).getText() != "");
-        Assertions.assertTrue(driver.findElement(By.xpath(locatorSubTitle)).getText() != "");
+        Assertions.assertNotEquals(driver.findElement(By.xpath(locatorTitle)).getText(),"");
+        Assertions.assertNotEquals(driver.findElement(By.xpath(locatorSubTitle)).getText(),"");
     }
 
     public void checkFormatCourse(){
         String locatorLearningTime = String.format(formatCourseTemplate, CoursePageFormatData.LEARNING_TIME.getName());
         String locatorFormat = String.format(formatCourseTemplate, CoursePageFormatData.LEARNING_FORMAT.getName());
-        Assertions.assertTrue(driver.findElement(By.xpath(locatorLearningTime)).getText() != "");
-        Assertions.assertTrue(driver.findElement(By.xpath(locatorFormat)).getText() != "");
+        Assertions.assertNotEquals(driver.findElement(By.xpath(locatorLearningTime)).getText(), "");
+        Assertions.assertNotEquals(driver.findElement(By.xpath(locatorFormat)).getText(), "");
     }
 }
 
